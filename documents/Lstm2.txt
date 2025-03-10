@@ -1,0 +1,37 @@
+LSTM (Long Short-Term Memory) Algorithm – Simplified Explanation
+LSTM is a special type of Recurrent Neural Network (RNN) that is designed to learn from sequential data and remember long-term dependencies. Unlike standard RNNs, which suffer from vanishing gradients, LSTMs use a memory cell to store important information and selectively forget unnecessary details.
+
+🧠 How LSTM Works – Step by Step
+Step 1: Input Sequence
+LSTM takes a time-series sequence as input (e.g., past earthquake data).
+Each time step contains multiple features (e.g., magnitude, depth, location, timestamp).
+
+Step 2: LSTM Cell Structure
+Each LSTM unit has three gates that control how information flows:
+1️⃣ Forget Gate
+Decides what past information to forget.
+Uses a sigmoid function (0 to 1) to filter important vs. unimportant data.
+ft=σ(Wf⋅[ht−1,xt]+bf)f_t = \sigma(W_f \cdot [h_{t-1}, x_t] + b_f)
+2️⃣ Input Gate
+Decides what new information to store in memory.
+Uses sigmoid & tanh functions to update memory.
+it=σ(Wi⋅[ht−1,xt]+bi)i_t = \sigma(W_i \cdot [h_{t-1}, x_t] + b_i) C~t=tanh⁡(WC⋅[ht−1,xt]+bC)\tilde{C}_t = \tanh(W_C \cdot [h_{t-1}, x_t] + b_C)
+3️⃣ Output Gate
+Controls what part of memory is passed to the next step.
+Uses sigmoid and tanh functions to generate the final output.
+ot=σ(Wo⋅[ht−1,xt]+bo)o_t = \sigma(W_o \cdot [h_{t-1}, x_t] + b_o) ht=ot∗tanh⁡(Ct)h_t = o_t * \tanh(C_t)
+Step 3: Memory Update
+Forget gate removes old information that is no longer useful.
+Input gate updates memory with new data.
+Output gate sends important information forward to make predictions.
+The memory cell state CtC_t is updated as:
+Ct=ft∗Ct−1+it∗C~tC_t = f_t * C_{t-1} + i_t * \tilde{C}_t
+Step 4: Prediction
+The final hidden state hth_t is passed to a fully connected output layer to make predictions.
+For earthquake prediction, LSTM outputs the predicted magnitude, depth, and location for the next time step.
+
+⚡ Why LSTM is Better Than RNN?
+✅ Solves vanishing gradient problem (can remember long-term patterns).
+ ✅ Stores important past information while forgetting irrelevant details.
+ ✅ Works well for time-series problems (like earthquake prediction).
+Would you like a Python implementation of LSTM for earthquake prediction? 🚀
